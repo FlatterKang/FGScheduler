@@ -17,13 +17,18 @@ limitations under the License.
 package main
 
 import (
+	"github.com/FlatterKang/FGScheduler/pkg/plugins/filters"
+	"github.com/FlatterKang/FGScheduler/pkg/plugins/prebind"
 	"k8s.io/component-base/cli"
 	"k8s.io/kubernetes/cmd/kube-scheduler/app"
 	"os"
 )
 
 func main() {
-	command := app.NewSchedulerCommand()
+	command := app.NewSchedulerCommand(
+		app.WithPlugin(filters.Name, filters.New),
+		app.WithPlugin(prebind.Name, prebind.New),
+	)
 	code := cli.Run(command)
 	os.Exit(code)
 }

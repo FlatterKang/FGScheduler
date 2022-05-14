@@ -28,10 +28,10 @@ local: init
 	go build -o=${BIN_DIR}/FGScheduler ./cmd/scheduler
 
 build-linux: init
-	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o=${BIN_DIR}/scheduler-framework-sample ./cmd/scheduler
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o=${BIN_DIR}/FGScheduler ./cmd/scheduler
 
 image: build-linux
-	docker build --no-cache . -t scheduler-framework-sample:$(TAG)
+	docker build --no-cache . -t FGScheduler:$(TAG)
 
 update:
 	go mod download
